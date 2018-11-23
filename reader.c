@@ -6,14 +6,12 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/22 18:01:01 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/23 17:43:20 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-
-#define ERROR write(1, "error\n", 6)
 
 /*int		connection_check(char *tetri)
   {
@@ -37,7 +35,7 @@
 
 /*-----------------OR----------------*/
 
-int		connection_check(char *tetri)
+int			connection_check(char *tetri)
 {
 	int i;
 	int	connect;
@@ -64,7 +62,7 @@ int		connection_check(char *tetri)
 	return (0);
 }
 
-int		buff_check(char *tetri)
+int			buff_check(char *tetri)
 {
 	int blocks;
 	int	i;
@@ -89,13 +87,13 @@ int		buff_check(char *tetri)
 	return (0);
 }
 
-t_fillit	*lstnew_fillit(t_fillit **begin_list, t_fillit *list, char *tetri)
+t_fillit	*get_tetri(t_fillit **begin_list, t_fillit *list, char *tetri)
 {
-	t_fillit 	*new;
+	t_fillit *new;
 
 	if (!(new = (t_fillit *)malloc(sizeof(t_fillit))))
 		return (NULL);
-	new->tetri = ft_strsplit(tetri, '\n');
+	new->tetri = moove_tetri(ft_strsplit(tetri, '\n'));
 	new->next = NULL;
 	new->x = 0;
 	new->y = 0;
@@ -106,13 +104,15 @@ t_fillit	*lstnew_fillit(t_fillit **begin_list, t_fillit *list, char *tetri)
 	}
 	else
 	{
-		*begin_list = new;	
+		*begin_list = new;
 		new->id = 'A';
 	}
+	if (new->id > 'Z')
+		return (NULL);
 	return (new);
 }
 
-void	ft_print_list(t_fillit *list)
+void		ft_print_list(t_fillit *list)
 {
 	int	i;
 
@@ -122,11 +122,12 @@ void	ft_print_list(t_fillit *list)
 		i = 0;
 		while (list->tetri[i])
 			printf("%s\n", list->tetri[i++]);
+		printf("\n");
 		list = list->next;
 	}
 }
 
-int		ft_reader(int fd)
+t_fillit	*ft_reader(int fd)
 {
 	char		buff[22];
 	int			ret;
@@ -138,27 +139,11 @@ int		ft_reader(int fd)
 	while ((ret = read(fd, buff, 21)) >= 20)
 	{
 		buff[ret] = '\0';
-		if (buff_check(buff) || !(list = lstnew_fillit(&begin_list, list, buff)))
-			return (1);
+		if (buff_check(buff) || !(list = get_tetri(&begin_list, list, buff)))
+			return (NULL);
 	}
-	if (ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
-		return (1);
+	if (!begin_list || ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
+		return (NULL);
 	ft_print_list(begin_list);
-	return (0);
-}
-
-int		main(int ac, char **av)
-{
-	int		fd;
-
-	if (ac != 2)
-	{
-		write(1, "usage: ./fillit source_file\n", 28);
-		return (1);
-	}
-	if ((fd = open(av[1], O_RDONLY)) < 0)
-		return (ERROR);
-	if (ft_reader(fd))
-		return (ERROR);
-	return (0);
+	return (begin_list);
 }

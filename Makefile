@@ -5,7 +5,10 @@ LDFLAG = -L./$(LIBDIR) -lft
 
 RM = rm -f
 
-SRC = reader.c
+SRC = reader.c \
+	  map.c \
+	  main.c \
+	  tetri.c
 
 OBJ = $(SRC:.c=.o)
 
