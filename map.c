@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 11:20:21 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 16:29:37 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:01:12 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,15 @@ char	**create_map(int size)
 char	**bigger_map(t_map *old_map)
 {
 	int i;
-	char **content;
 
 	i = 0;
-	content = old_map->content;
-//	while (*content)
-//		free(*content);
-//	free(content);
-	return (create_map(old_map->size + 1));
+	while (old_map->content[i])
+		free(old_map->content[i++]);
+	free(old_map->content);
+	return (create_map(i + 1));
 }
 
-int     solve_map(t_tetri *actual_tetri, t_map *map)
+int		solve_map(t_tetri *actual_tetri, t_map *map)
 {
 	int x;
 	int y;

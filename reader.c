@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 16:28:35 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/26 17:01:27 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int			buff_check(char *tetri)
 	return (0);
 }
 
-t_tetri	*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
+t_tetri		*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 {
 	t_tetri *new;
 
@@ -87,7 +87,7 @@ t_tetri	*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 	return (new);
 }
 
-t_tetri	*ft_reader(int fd)
+t_tetri		*ft_reader(int fd)
 {
 	char		buff[22];
 	int			ret;

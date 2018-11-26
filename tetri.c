@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:53:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 16:29:54 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/26 16:58:18 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	find_x_y(char **tetri, int *x_min, int *y_min)
 	x = 0;
 	*x_min = 3;
 	*y_min = 3;
-	while (tetri[x])
+	while (x < 4)
 	{
 		y = 0;
-		while (tetri[x][y])
+		while (y < 4)
 		{
 			if (tetri[x][y] == '#')
 			{
@@ -45,10 +45,10 @@ char	**moove_tetri(char **tetri)
 
 	x = 0;
 	find_x_y(tetri, &x_min, &y_min);
-	while (tetri[x])
+	while (x < 4)
 	{
 		y = 0;
-		while (tetri[x][y])
+		while (y < 4)
 		{
 			if (tetri[x][y] == '#')
 			{
@@ -89,10 +89,10 @@ int		possible_to_place(t_tetri *tetri, t_map *map, int x, int y)
 
 	j = 0;
 	size = map->size;
-	while (tetri->content[j])
+	while (j < 4)
 	{
 		i = 0;
-		while (tetri->content[j][i])
+		while (i < 4)
 		{
 			if (tetri->content[j][i] == '#' && (j + x >= size || i + y >= size || map->content[x + j][i + y] != '.'))
 				return (0);
@@ -111,10 +111,10 @@ void	remove_tetri(char id, t_map *map)
 
 	blocks = 0;
 	x = 0;
-	while (map->content[x])
+	while (x < map->size)
 	{
 		y = 0;
-		while (map->content[x][y])
+		while (y < map->size)
 		{
 			if (map->content[x][y] == id)
 			{
