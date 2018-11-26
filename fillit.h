@@ -6,33 +6,41 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:57:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/23 17:44:22 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/26 15:51:25 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# define ERROR write(1, "error\n", 6)
+# define ERROR (int)write(1, "error\n", 6)
 
 # include "libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
 
-typedef struct		s_fillit
+typedef struct		s_tetri
 {
 	char			id;
-	char			**tetri;
-	int				x;
-	int				y;
-	struct s_fillit	*next;
-}					t_fillit;
+	char			**content;
+	struct s_tetri	*next;
+}					t_tetri;
 
-t_fillit	*ft_reader(int fd);
+typedef struct		s_map
+{
+	char			**content;
+	int				size;
+}					t_map;
+
+t_tetri		*ft_reader(int fd);
 char		**create_map(int size);
 char		**moove_tetri(char **tetri);
-int			map_len(t_fillit *list);
-char		**bigger_map(char **old_map);
+char		**bigger_map(t_map *old_map);
+void		remove_tetri(char id, t_map *map);
+void		place_tetri(t_tetri *tetri, t_map *map, int x, int y); 
+int			possible_to_place(t_tetri *tetri, t_map *map, int x, int y);
+int			solve_map(t_tetri *actual_tetri, t_map *map);
+t_map		*create_min_map(t_tetri *tetri);
 
 #endif

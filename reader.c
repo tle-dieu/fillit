@@ -6,34 +6,11 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/23 17:43:20 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/26 16:28:35 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
-
-/*int		connection_check(char *tetri)
-  {
-  int i;
-
-  i = 0;
-  while (i < 20)
-  {
-  if (tetri[i] == '#')
-  {
-  if (!((i + 1 < 20 && tetri[i + 1] == '#')
-  || (i - 1 >= 0 && tetri[i - 1] == '#')
-  || (i + 5 < 20 && tetri[i + 5] == '#')
-  || (i - 5 >= 0 && tetri[i - 5] == '#')))
-  return (1);
-  }
-  i++;
-  }
-  return (0);
-  }*/
-
-/*-----------------OR----------------*/
 
 int			connection_check(char *tetri)
 {
@@ -41,24 +18,24 @@ int			connection_check(char *tetri)
 	int	connect;
 
 	i = 0;
+	connect = 0;
 	while (i < 20)
 	{
 		if (tetri[i] == '#')
 		{
-			connect = 0;
 			if (i + 1 < 20 && tetri[i + 1] == '#')
 				connect++;
-			else if (i - 1 >= 0 && tetri[i - 1] == '#')
+			if (i - 1 >= 0 && tetri[i - 1] == '#')
 				connect++;
-			else if (i + 5 < 20 && tetri[i + 5] == '#')
+			if (i + 5 < 20 && tetri[i + 5] == '#')
 				connect++;
-			else if (i - 5 >= 0 && tetri[i - 5] == '#')
+			if (i - 5 >= 0 && tetri[i - 5] == '#')
 				connect++;
-			if (!(connect))
-				return (1);
 		}
 		i++;
 	}
+	if (connect <= 4)
+		return (1);
 	return (0);
 }
 
@@ -87,24 +64,22 @@ int			buff_check(char *tetri)
 	return (0);
 }
 
-t_fillit	*get_tetri(t_fillit **begin_list, t_fillit *list, char *tetri)
+t_tetri	*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 {
-	t_fillit *new;
+	t_tetri *new;
 
-	if (!(new = (t_fillit *)malloc(sizeof(t_fillit))))
+	if (!(new = (t_tetri *)malloc(sizeof(t_tetri))))
 		return (NULL);
-	new->tetri = moove_tetri(ft_strsplit(tetri, '\n'));
+	new->content = moove_tetri(ft_strsplit(str, '\n'));
 	new->next = NULL;
-	new->x = 0;
-	new->y = 0;
-	if (list)
+	if (tetri)
 	{
-		new->id = list->id + 1;
-		list->next = new;
+		new->id = tetri->id + 1;
+		tetri->next = new;
 	}
 	else
 	{
-		*begin_list = new;
+		*first_tetri = new;
 		new->id = 'A';
 	}
 	if (new->id > 'Z')
@@ -112,38 +87,22 @@ t_fillit	*get_tetri(t_fillit **begin_list, t_fillit *list, char *tetri)
 	return (new);
 }
 
-void		ft_print_list(t_fillit *list)
-{
-	int	i;
-
-	while (list)
-	{
-		printf("id: %c\n", list->id);
-		i = 0;
-		while (list->tetri[i])
-			printf("%s\n", list->tetri[i++]);
-		printf("\n");
-		list = list->next;
-	}
-}
-
-t_fillit	*ft_reader(int fd)
+t_tetri	*ft_reader(int fd)
 {
 	char		buff[22];
 	int			ret;
-	t_fillit	*list;
-	t_fillit	*begin_list;
+	t_tetri		*tetri;
+	t_tetri		*first_tetri;
 
-	begin_list = NULL;
-	list = NULL;
+	first_tetri = NULL;
+	tetri = NULL;
 	while ((ret = read(fd, buff, 21)) >= 20)
 	{
 		buff[ret] = '\0';
-		if (buff_check(buff) || !(list = get_tetri(&begin_list, list, buff)))
+		if (buff_check(buff) || !(tetri = get_tetri(&first_tetri, tetri, buff)))
 			return (NULL);
 	}
-	if (!begin_list || ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
+	if (!first_tetri || ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
 		return (NULL);
-	ft_print_list(begin_list);
-	return (begin_list);
+	return (first_tetri);
 }
