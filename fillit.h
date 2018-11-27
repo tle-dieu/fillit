@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:57:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 14:35:23 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 15:09:21 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ int					possible_to_place(t_tetri *tetri, t_map *map, int x, int y);
 int					solve_map(t_tetri *actual_tetri, t_map *map);
 t_map				*create_min_map(t_tetri *tetri);
 void				print_map(t_map *map);
+void				free_tetri(t_tetri *tetri);
 
 #endif

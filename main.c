@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:21:41 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 14:56:58 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 15:06:36 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		main(int ac, char **av)
 	print_map(map);
 	free_map(map);
 	free(map);
+	free_tetri(tetri);
 	return (0);
 }
