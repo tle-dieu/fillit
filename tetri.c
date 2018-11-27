@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:53:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 17:27:30 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/26 18:40:30 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,19 @@ int		possible_to_place(t_tetri *tetri, t_map *map, int x, int y)
 {
 	int i;
 	int j;
-	int size;
 
 	j = 0;
-	size = map->size;
 	while (j < 4)
 	{
 		i = 0;
 		while (i < 4)
 		{
-			if ((tetri->content[j][i] == '#') && (j + x >= size
-			|| i + y >= size || map->content[x + j][i + y] != '.'))
-				return (0);
+			if (tetri->content[j][i] == '#')
+			{
+				if (j + x >= map->size || i + y >= map->size
+						|| map->content[x + j][i + y] != '.')
+					return (0);
+			}
 			i++;
 		}
 		j++;

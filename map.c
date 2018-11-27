@@ -6,13 +6,12 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 11:20:21 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 17:01:12 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 14:55:52 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
-#include <stdio.h>
+#include <stdlib.h>
 
 char	**create_map(int size)
 {
@@ -20,7 +19,7 @@ char	**create_map(int size)
 	int		i;
 	int		j;
 
-	if (!(new_map = (char **)malloc(sizeof(char *) * size + 1)))
+	if (!(new_map = (char **)malloc(sizeof(char *) * size)))
 		return (NULL);
 	j = 0;
 	while (j < size)
@@ -35,48 +34,18 @@ char	**create_map(int size)
 		}
 		while (i < size)
 			new_map[j][i++] = '.';
-		new_map[j++][i] = '\0';
+		j++;
 	}
-	new_map[j] = NULL;
 	return (new_map);
 }
 
-char	**bigger_map(t_map *old_map)
+void	print_map(t_map *map)
 {
-	int i;
+	int j;
 
-	i = 0;
-	while (old_map->content[i])
-		free(old_map->content[i++]);
-	free(old_map->content);
-	return (create_map(i + 1));
-}
-
-int		solve_map(t_tetri *actual_tetri, t_map *map)
-{
-	int x;
-	int y;
-
-	if (!(actual_tetri))
-		return (1);
-	x = 0;
-	while (x < map->size)
-	{
-		y = 0;
-		while (y < map->size)
-		{
-			if (possible_to_place(actual_tetri, map, x, y))
-			{
-				place_tetri(actual_tetri, map, x, y);
-				if (solve_map(actual_tetri->next, map))
-					return (1);
-			}
-			y++;
-		}
-		x++;
-	}
-	remove_tetri(actual_tetri->id - 1, map);
-	return (0);
+	j = 0;
+	while (j < map->size)
+		ft_putendl(map->content[j++]);
 }
 
 t_map	*create_min_map(t_tetri *tetri)
@@ -100,4 +69,31 @@ t_map	*create_min_map(t_tetri *tetri)
 		return (NULL);
 	}
 	return (map);
+}
+
+int		solve_map(t_tetri *actual_tetri, t_map *map)
+{
+	int x;
+	int y;
+
+	if (!actual_tetri)
+		return (1);
+	x = 0;
+	while (x < map->size)
+	{
+		y = 0;
+		while (y < map->size)
+		{
+			if (possible_to_place(actual_tetri, map, x, y))
+			{
+				place_tetri(actual_tetri, map, x, y);
+				if (solve_map(actual_tetri->next, map))
+					return (1);
+			}
+			y++;
+		}
+		x++;
+	}
+	remove_tetri(actual_tetri->id - 1, map);
+	return (0);
 }

@@ -8,7 +8,8 @@ RM = rm -f
 SRC = reader.c \
 	  map.c \
 	  main.c \
-	  tetri.c
+	  tetri.c \
+	  free.c
 
 OBJ = $(SRC:.c=.o)
 

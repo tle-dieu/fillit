@@ -6,11 +6,14 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:21:41 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 16:55:22 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 14:56:58 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 int		main(int ac, char **av)
 {
@@ -30,10 +33,10 @@ int		main(int ac, char **av)
 	if (!(map = create_min_map(tetri)))
 		return (ERROR);
 	while (!(solve_map(tetri, map)))
-	{
-		map->content = bigger_map(map);
-		map->size++;
-	}
-	ft_print_words_tables(map->content);
+		if (!(map->content = create_map(map->size += 1)))
+			return (ERROR);
+	print_map(map);
+	free_map(map);
+	free(map);
 	return (0);
 }
