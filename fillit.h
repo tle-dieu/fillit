@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:57:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 19:00:01 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 19:20:31 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define FILLIT_H
 
 # include "libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
 
 typedef struct		s_tetri
 {

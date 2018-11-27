@@ -6,14 +6,11 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 18:42:52 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 19:19:37 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 int			connection_check(char *tetri)
 {

@@ -6,13 +6,11 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:21:41 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 19:02:19 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 19:19:21 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 int		main(int ac, char **av)
 {

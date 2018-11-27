@@ -6,12 +6,11 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 11:20:21 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 18:43:34 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 19:19:17 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdlib.h>
 
 void	free_map(t_map *old_map)
 {

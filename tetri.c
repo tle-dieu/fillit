@@ -6,12 +6,11 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:53:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 18:44:46 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 19:19:41 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdlib.h>
 
 void	free_tetri(t_tetri *tetri)
 {
