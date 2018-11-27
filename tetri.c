@@ -6,11 +6,29 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:53:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 15:58:50 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:44:46 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdlib.h>
+
+void	free_tetri(t_tetri *tetri)
+{
+	int		i;
+	t_tetri	*next;
+
+	while (tetri)
+	{
+		i = 0;
+		while (i < 4)
+			free(tetri->content[i++]);
+		free(tetri->content);
+		next = tetri->next;
+		free(tetri);
+		tetri = next;
+	}
+}
 
 void	find_x_y(char **tetri, int *x_min, int *y_min)
 {
@@ -60,73 +78,4 @@ char	**moove_tetri(char **tetri)
 		x++;
 	}
 	return (tetri);
-}
-
-void	place_tetri(t_tetri *tetri, t_map *map, int x, int y)
-{
-	int i;
-	int j;
-
-	j = 0;
-	while (j < 4)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			if (tetri->content[j][i] == '#')
-				map->content[x + j][y + i] = tetri->id;
-			i++;
-		}
-		j++;
-	}
-}
-
-int		possible_to_place(t_tetri *tetri, t_map *map, int x, int y)
-{
-	int i;
-	int j;
-
-	j = 0;
-	while (j < 4)
-	{
-		i = 0;
-		while (i < 4)
-		{
-			if (tetri->content[j][i] == '#')
-			{
-				if (j + x >= map->size || i + y >= map->size
-						|| map->content[x + j][i + y] != '.')
-					return (0);
-			}
-			i++;
-		}
-		j++;
-	}
-	return (1);
-}
-
-void	remove_tetri(char id, t_map *map)
-{
-	int blocks;
-	int x;
-	int y;
-
-	blocks = 0;
-	x = 0;
-	while (x < map->size)
-	{
-		y = 0;
-		while (y < map->size)
-		{
-			if (map->content[x][y] == id)
-			{
-				map->content[x][y] = '.';
-				blocks++;
-			}
-			y++;
-		}
-		if (blocks == 4)
-			break ;
-		x++;
-	}
 }

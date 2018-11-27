@@ -6,12 +6,33 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 11:20:21 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 16:48:07 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:43:34 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdlib.h>
+
+void	free_map(t_map *old_map)
+{
+	int i;
+
+	i = 0;
+	while (i < old_map->size)
+		free(old_map->content[i++]);
+	free(old_map->content);
+}
+
+void	print_map(t_map *map)
+{
+	int j;
+
+	j = 0;
+	while (j < map->size)
+		ft_putendl(map->content[j++]);
+	free_map(map);
+	free(map);
+}
 
 char	**create_map(int size)
 {
@@ -39,17 +60,6 @@ char	**create_map(int size)
 	return (new_map);
 }
 
-void	print_map(t_map *map)
-{
-	int j;
-
-	j = 0;
-	while (j < map->size)
-		ft_putendl(map->content[j++]);
-	free_map(map);
-	free(map);
-}
-
 t_map	*create_min_map(t_tetri *tetri)
 {
 	t_map	*map;
@@ -57,7 +67,10 @@ t_map	*create_min_map(t_tetri *tetri)
 
 	size = 1;
 	if (!(map = (t_map *)malloc(sizeof(t_map))))
+	{
+		free_tetri(tetri);
 		return (NULL);
+	}
 	while ((tetri = tetri->next))
 		size++;
 	size *= 4;
@@ -67,35 +80,9 @@ t_map	*create_min_map(t_tetri *tetri)
 	map->size = size;
 	if (!(map->content = create_map(size)))
 	{
+		free_tetri(tetri);
 		free(map);
 		return (NULL);
 	}
 	return (map);
-}
-
-int		solve_map(t_tetri *actual_tetri, t_map *map)
-{
-	int x;
-	int y;
-
-	if (!actual_tetri)
-		return (1);
-	x = 0;
-	while (x < map->size)
-	{
-		y = 0;
-		while (y < map->size)
-		{
-			if (possible_to_place(actual_tetri, map, x, y))
-			{
-				place_tetri(actual_tetri, map, x, y);
-				if (solve_map(actual_tetri->next, map))
-					return (1);
-			}
-			y++;
-		}
-		x++;
-	}
-	remove_tetri(actual_tetri->id - 1, map);
-	return (0);
 }

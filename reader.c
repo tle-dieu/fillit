@@ -6,14 +6,14 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 16:47:37 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 18:42:52 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <unistd.h>
-#include <stdlib.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int			connection_check(char *tetri)
 {
@@ -109,9 +109,7 @@ t_tetri		*ft_reader(char *file)
 			break ;
 	}
 	close(fd);
-	if (!first_tetri)
-		return (NULL);
-	if (ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
+	if (!first_tetri || ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
 	{
 		free_tetri(first_tetri);
 		return (NULL);

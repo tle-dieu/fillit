@@ -6,14 +6,12 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:57:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 16:18:47 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 19:00:01 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FILLIT_H
 # define FILLIT_H
-
-# define ERROR (int)write(1, "error\n", 6)
 
 # include "libft.h"
 

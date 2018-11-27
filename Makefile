@@ -9,7 +9,7 @@ SRC = reader.c \
 	  map.c \
 	  main.c \
 	  tetri.c \
-	  free.c
+	  solve.c
 
 OBJ = $(SRC:.c=.o)
 
