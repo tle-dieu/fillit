@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:57:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 15:09:21 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:18:47 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct		s_map
 	int				size;
 }					t_map;
 
-t_tetri				*ft_reader(int fd);
+t_tetri				*ft_reader(char *file);
 char				**create_map(int size);
 char				**moove_tetri(char **tetri);
 void				free_map(t_map *old_map);

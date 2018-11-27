@@ -6,13 +6,14 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/26 18:23:52 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:47:37 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 int			connection_check(char *tetri)
 {
@@ -89,22 +90,31 @@ t_tetri		*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 	return (new);
 }
 
-t_tetri		*ft_reader(int fd)
+t_tetri		*ft_reader(char *file)
 {
 	char		buff[22];
 	int			ret;
 	t_tetri		*tetri;
 	t_tetri		*first_tetri;
+	int			fd;
 
 	first_tetri = NULL;
 	tetri = NULL;
+	if (((fd = open(file, O_RDONLY)) < 0))
+		return (NULL);
 	while ((ret = read(fd, buff, 21)) >= 20)
 	{
 		buff[ret] = '\0';
 		if (buff_check(buff) || !(tetri = get_tetri(&first_tetri, tetri, buff)))
-			return (NULL);
+			break ;
 	}
-	if (!first_tetri || ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
+	close(fd);
+	if (!first_tetri)
 		return (NULL);
+	if (ret || *(ft_strrchr(buff, '\n') - 1) == '\n')
+	{
+		free_tetri(first_tetri);
+		return (NULL);
+	}
 	return (first_tetri);
 }

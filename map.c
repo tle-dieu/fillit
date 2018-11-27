@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 11:20:21 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 14:55:52 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/27 16:48:07 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	print_map(t_map *map)
 	j = 0;
 	while (j < map->size)
 		ft_putendl(map->content[j++]);
+	free_map(map);
+	free(map);
 }
 
 t_map	*create_min_map(t_tetri *tetri)
