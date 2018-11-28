@@ -6,30 +6,13 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:53:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 19:19:41 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:44:54 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-void	free_tetri(t_tetri *tetri)
-{
-	int		i;
-	t_tetri	*next;
-
-	while (tetri)
-	{
-		i = 0;
-		while (i < 4)
-			free(tetri->content[i++]);
-		free(tetri->content);
-		next = tetri->next;
-		free(tetri);
-		tetri = next;
-	}
-}
-
-void	find_x_y(char **tetri, int *x_min, int *y_min)
+static void	find_x_y(char **tetri, int *x_min, int *y_min)
 {
 	int y;
 	int x;
@@ -53,7 +36,7 @@ void	find_x_y(char **tetri, int *x_min, int *y_min)
 	}
 }
 
-char	**moove_tetri(char **tetri)
+char		**moove_tetri(char **tetri)
 {
 	int x_min;
 	int y_min;
@@ -77,4 +60,21 @@ char	**moove_tetri(char **tetri)
 		x++;
 	}
 	return (tetri);
+}
+
+void		free_tetri(t_tetri *tetri)
+{
+	int		i;
+	t_tetri	*next;
+
+	while (tetri)
+	{
+		i = 0;
+		while (i < 4)
+			free(tetri->content[i++]);
+		free(tetri->content);
+		next = tetri->next;
+		free(tetri);
+		tetri = next;
+	}
 }

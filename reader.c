@@ -6,13 +6,13 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/27 19:19:37 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/28 17:43:44 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-int			connection_check(char *tetri)
+static int		connection_check(char *tetri)
 {
 	int i;
 	int	connect;
@@ -39,7 +39,7 @@ int			connection_check(char *tetri)
 	return (0);
 }
 
-int			buff_check(char *tetri)
+static int		buff_check(char *tetri)
 {
 	int blocks;
 	int	i;
@@ -64,7 +64,7 @@ int			buff_check(char *tetri)
 	return (0);
 }
 
-t_tetri		*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
+static t_tetri	*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 {
 	t_tetri *new;
 
@@ -87,7 +87,7 @@ t_tetri		*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 	return (new);
 }
 
-t_tetri		*ft_reader(char *file)
+t_tetri			*ft_reader(char *file)
 {
 	char		buff[22];
 	int			ret;
