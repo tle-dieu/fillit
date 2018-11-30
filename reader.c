@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 15:46:50 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/28 17:43:44 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/30 12:29:47 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,21 @@ static int		buff_check(char *tetri)
 			return (1);
 		i++;
 	}
-	if (blocks != 4 || connection_check(tetri))
+	if (blocks != 4 || connection_check(tetri) ||
+	(ft_strlen(tetri) == 21 && tetri[20] != '\n'))
 		return (1);
 	return (0);
 }
 
-static t_tetri	*get_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
+static t_tetri	*new_tetri(t_tetri **first_tetri, t_tetri *tetri, char *str)
 {
 	t_tetri *new;
 
 	if (!(new = (t_tetri *)malloc(sizeof(t_tetri))))
 		return (NULL);
-	new->content = moove_tetri(ft_strsplit(str, '\n'));
+	if (!(new->content = ft_strsplit(str, '\n')))
+		return (NULL);
+	moove_tetri(new->content);
 	new->next = NULL;
 	if (tetri)
 	{
@@ -102,7 +105,7 @@ t_tetri			*ft_reader(char *file)
 	while ((ret = read(fd, buff, 21)) >= 20)
 	{
 		buff[ret] = '\0';
-		if (buff_check(buff) || !(tetri = get_tetri(&first_tetri, tetri, buff)))
+		if (buff_check(buff) || !(tetri = new_tetri(&first_tetri, tetri, buff)))
 			break ;
 	}
 	close(fd);

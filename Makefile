@@ -38,12 +38,12 @@ $(LIBFT):
 clean:
 	@(cd $(LIBDIR) && $(MAKE) $@)
 	@$(RM) $(OBJ)
-	@echo "$(RED)The gnl objects have been removed$(NC)"
+	@echo "$(RED)The fillit objects have been removed$(NC)"
 
 fclean:
 	@(cd $(LIBDIR) && $(MAKE) $@)
 	@$(RM) $(OBJ) $(NAME)
-	@echo "$(RED)The gnl objects have been removed$(NC)"
+	@echo "$(RED)The fillit objects have been removed$(NC)"
 	@echo "$(RED)$(NAME) has been removed$(NC)"
 
 re: fclean all

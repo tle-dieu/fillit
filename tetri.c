@@ -6,7 +6,7 @@
 /*   By: tle-dieu <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 14:53:12 by tle-dieu          #+#    #+#             */
-/*   Updated: 2018/11/28 17:44:54 by tle-dieu         ###   ########.fr       */
+/*   Updated: 2018/11/30 12:24:45 by tle-dieu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	find_x_y(char **tetri, int *x_min, int *y_min)
 	}
 }
 
-char		**moove_tetri(char **tetri)
+void		moove_tetri(char **tetri)
 {
 	int x_min;
 	int y_min;
@@ -59,7 +59,6 @@ char		**moove_tetri(char **tetri)
 		}
 		x++;
 	}
-	return (tetri);
 }
 
 void		free_tetri(t_tetri *tetri)
