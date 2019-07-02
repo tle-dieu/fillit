@@ -28,7 +28,7 @@ HHHDDG
 ```
 
 ## Authors
-  - Matthew Leroy - [matleroy](https://github.com/lympe)
+  - Matthew Leroy - [lympe](https://github.com/lympe)
   - Thomas le Dieu de Ville - [tle-dieu](https://github.com/tle-dieu)
 
 ## Notes
