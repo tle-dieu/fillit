@@ -41,3 +41,7 @@ HHHDDG
 ## Notes
 
 This code complies with the 42 school [norm](https://github.com/Binary-Hackers/42_Subjects/blob/master/04_Norme/norme_2_0_1.pdf)
+
+&nbsp;
+
+###### Done in 11/18 ######
