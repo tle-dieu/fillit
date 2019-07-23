@@ -16,7 +16,9 @@ Run `make` command and an executable called `fillit` should be created.
 
 ## Usage
 
-`./fillit source_file`
+```bash
+./fillit source_file
+```
 
 ## Example
 
