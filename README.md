@@ -7,8 +7,8 @@ returns the first possible solution when placing them recursively from the top l
 
 ## Subjects
 
-- [English](subjects/fillit.en.pdf)
-- [French](subjects/fillit.fr.pdf)
+- [English](/subjects/fillit.en.pdf)
+- [French](/subjects/fillit.fr.pdf)
 
 ## Compiling
 
@@ -40,7 +40,7 @@ HHHDDG
 
 ## Notes
 
-This code complies with the 42 school [norm](https://github.com/Binary-Hackers/42_Subjects/blob/master/04_Norme/norme_2_0_1.pdf)
+This code complies with the 42 school [norm](/subjects/norme_2_0_1.pdf)
 
 &nbsp;
 
